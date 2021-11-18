@@ -1,23 +1,23 @@
+import { Line } from '.';
 import { Point } from './point';
 
-export class Ray {
-	public static MAX = Infinity;
-
-	private _end!: Point;
-
-	public get end() {
-		return this._end;
-	}
+export class Ray extends Line {
+	/** 某种计算意义上的长度 */
+	public static LENGTH = 100_000_000;
 
 	private _angle = 0.0;
 
+	/**
+	 * 角度
+	 */
 	public set angle(a: number) {
 		this._angle = a;
 
-		const { MAX } = Ray;
-		this._end = new Point(
-			MAX * Math.cos(this._angle),
-			MAX * Math.sin(this._angle),
+		const { LENGTH } = Ray;
+
+		this.end = new Point(
+			LENGTH * Math.cos(this._angle) + this.start.x,
+			LENGTH * Math.sin(this._angle) + this.start.y,
 		);
 	}
 
@@ -25,7 +25,8 @@ export class Ray {
 		return this._angle;
 	}
 
-	public constructor(public start: Point, angle = 0.0) {
-		this.angle = angle;
+	public constructor(public start: Point) {
+		super(start, new Point());
+		this.angle = this._angle;
 	}
 }

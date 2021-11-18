@@ -5,3 +5,6 @@ export * from './path';
 export * from './point';
 export * from './ray';
 export * from './rect';
+
+export * from './types';
+export * from './algorithms';
